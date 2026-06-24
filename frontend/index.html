@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GENRECT — AI-Powered Deepfake Detection System</title>
+  <meta name="description" content="GENRECT is a cutting-edge AI-powered deepfake detection system for image authenticity verification. Detect manipulated images with high confidence using advanced neural networks." />
+  <meta name="keywords" content="deepfake detection, AI image analysis, image authenticity, GENRECT, neural network" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Neural network background canvas -->
+  <canvas id="neuralCanvas" aria-hidden="true"></canvas>
+
+  <!-- Navigation -->
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <span class="logo-text">GENRECT</span>
+        <span class="logo-badge">AI</span>
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#hero" class="nav-link">Home</a></li>
+        <li><a href="#upload" class="nav-link">Analyze</a></li>
+        <li><a href="#features" class="nav-link">Features</a></li>
+        <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
+      </ul>
+      <button class="nav-cta" id="navCta" aria-label="Get started with GENRECT">Get Started</button>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero" aria-labelledby="heroTitle">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        <span>Powered by Advanced Neural Networks</span>
+      </div>
+
+      <h1 class="hero-title" id="heroTitle">GENRECT</h1>
+
+      <p class="hero-subtitle">
+        AI-Powered Deepfake Detection System<br />
+        <span class="hero-subtitle-accent">for Image Authenticity Verification</span>
+      </p>
+
+      <p class="hero-description">
+        Harness the power of advanced deep learning to instantly detect manipulated images with
+        industry-leading precision. Trusted by security professionals worldwide.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#upload" class="btn-primary" id="heroAnalyzeBtn" aria-label="Start analyzing images">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+          Analyze Image
+        </a>
+        <a href="#how-it-works" class="btn-secondary" id="heroLearnBtn">Learn How It Works</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-number">99.2<span class="stat-unit">%</span></span>
+          <span class="stat-label">Detection Accuracy</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat-item">
+          <span class="stat-number">2.4<span class="stat-unit">s</span></span>
+          <span class="stat-label">Analysis Speed</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat-item">
+          <span class="stat-number">50<span class="stat-unit">M+</span></span>
+          <span class="stat-label">Images Analyzed</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual" aria-hidden="true">
+      <div class="scan-animation">
+        <div class="scan-frame">
+          <div class="scan-line"></div>
+          <div class="scan-corner tl"></div>
+          <div class="scan-corner tr"></div>
+          <div class="scan-corner bl"></div>
+          <div class="scan-corner br"></div>
+          <div class="scan-grid"></div>
+        </div>
+        <div class="scan-particles">
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Upload Section -->
+  <section class="upload-section" id="upload" aria-labelledby="uploadTitle">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Image Analysis</span>
+        <h2 class="section-title" id="uploadTitle">Upload & Detect</h2>
+        <p class="section-desc">Drop your image below to instantly verify its authenticity using our AI engine.</p>
+      </div>
+
+      <div class="upload-card" id="uploadCard">
+        <div
+          class="drop-zone"
+          id="dropZone"
+          role="region"
+          aria-label="Image upload area"
+          tabindex="0"
+          aria-describedby="dropZoneHint"
+        >
+          <div class="drop-zone-inner" id="dropZoneInner">
+            <div class="upload-icon-wrap">
+              <svg class="upload-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="17 8 12 3 7 8"/>
+                <line x1="12" y1="3" x2="12" y2="15"/>
+              </svg>
+              <div class="upload-icon-ring" aria-hidden="true"></div>
+            </div>
+            <h3 class="drop-title">Drag & Drop your image here</h3>
+            <p class="drop-subtitle" id="dropZoneHint">or click to browse from your device</p>
+            <div class="drop-formats">
+              <span class="format-tag">JPG</span>
+              <span class="format-tag">JPEG</span>
+              <span class="format-tag">PNG</span>
+              <span class="format-tag">WEBP</span>
+            </div>
+            <input
+              type="file"
+              id="fileInput"
+              accept=".jpg,.jpeg,.png,.webp"
+              aria-label="Choose image file"
+              hidden
+            />
+            <button class="btn-upload" id="uploadBtn" aria-label="Browse and select an image file">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="17 8 12 3 7 8"/>
+                <line x1="12" y1="3" x2="12" y2="15"/>
+              </svg>
+              Browse Files
+            </button>
+          </div>
+
+          <!-- Preview State -->
+          <div class="drop-zone-preview" id="dropZonePreview" hidden>
+            <img id="previewImage" src="" alt="Uploaded image preview" class="preview-img" />
+            <div class="preview-overlay">
+              <p class="preview-filename" id="previewFilename">image.jpg</p>
+              <button class="btn-change" id="changeBtn" aria-label="Change the selected image">Change Image</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="upload-actions">
+          <button class="btn-analyze" id="analyzeBtn" disabled aria-label="Start deepfake analysis">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 8v4l3 3"/>
+            </svg>
+            Analyze for Deepfake
+          </button>
+        </div>
+      </div>
+
+      <!-- Results Section -->
+      <div class="results-section" id="resultsSection" hidden aria-live="polite" aria-label="Analysis results">
+
+        <!-- Loading State -->
+        <div class="loading-card" id="loadingCard" hidden>
+          <div class="loading-animation">
+            <div class="loader-ring"></div>
+            <div class="loader-ring inner"></div>
+            <svg class="loader-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+            </svg>
+          </div>
+          <h3 class="loading-title">Analyzing Image...</h3>
+          <p class="loading-desc">Our AI model is scanning your image for manipulation artifacts</p>
+          <div class="loading-steps">
+            <div class="loading-step active" id="step1">
+              <span class="step-dot"></span>
+              <span>Preprocessing image</span>
+            </div>
+            <div class="loading-step" id="step2">
+              <span class="step-dot"></span>
+              <span>Running neural network inference</span>
+            </div>
+            <div class="loading-step" id="step3">
+              <span class="step-dot"></span>
+              <span>Computing confidence scores</span>
+            </div>
+            <div class="loading-step" id="step4">
+              <span class="step-dot"></span>
+              <span>Generating analysis report</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Result Card -->
+        <div class="result-card glass-card" id="resultCard" hidden>
+          <div class="result-header">
+            <div class="result-status" id="resultStatus">
+              <div class="status-icon-wrap" id="statusIconWrap">
+                <!-- Icon injected by JS -->
+              </div>
+              <div class="status-text">
+                <div class="status-badge" id="statusBadge">REAL IMAGE</div>
+                <p class="status-sub" id="statusSub">No manipulation detected</p>
+              </div>
+            </div>
+            <div class="result-actions">
+              <button class="btn-icon" id="resetBtn" title="Reset and analyze another image" aria-label="Reset and analyze another image">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                  <path d="M3 3v5h5"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="result-body">
+            <!-- Confidence Score -->
+            <div class="confidence-section">
+              <h3 class="metric-label">Confidence Score</h3>
+              <div class="confidence-display">
+                <div class="circular-progress" id="circularProgress" role="img" aria-label="Confidence score">
+                  <svg class="progress-svg" width="140" height="140" viewBox="0 0 140 140" aria-hidden="true">
+                    <circle class="progress-bg" cx="70" cy="70" r="58" />
+                    <circle class="progress-fill" id="progressFill" cx="70" cy="70" r="58"
+                      stroke-dasharray="364.4"
+                      stroke-dashoffset="364.4"
+                    />
+                  </svg>
+                  <div class="progress-center">
+                    <span class="progress-value" id="progressValue">0%</span>
+                    <span class="progress-sublabel">Confidence</span>
+                  </div>
+                </div>
+                <div class="confidence-meta">
+                  <div class="confidence-bar-row">
+                    <span class="bar-label">Accuracy</span>
+                    <div class="bar-track" role="progressbar" aria-label="Accuracy level">
+                      <div class="bar-fill" id="accuracyBar"></div>
+                    </div>
+                    <span class="bar-value" id="accuracyValue">—</span>
+                  </div>
+                  <div class="confidence-level-row">
+                    <span class="bar-label">Confidence Level</span>
+                    <span class="confidence-level-badge" id="confidenceLevelBadge">—</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Metric Cards -->
+            <div class="metrics-grid">
+              <div class="metric-card" id="metricAuthenticity">
+                <div class="metric-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  </svg>
+                </div>
+                <div class="metric-info">
+                  <span class="metric-name">Authenticity Score</span>
+                  <span class="metric-value" id="authenticityScore">—</span>
+                </div>
+                <div class="metric-bar">
+                  <div class="metric-bar-fill" id="authenticityBar"></div>
+                </div>
+              </div>
+
+              <div class="metric-card" id="metricDeepfake">
+                <div class="metric-icon danger">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                    <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+                  </svg>
+                </div>
+                <div class="metric-info">
+                  <span class="metric-name">Deepfake Probability</span>
+                  <span class="metric-value" id="deepfakeProb">—</span>
+                </div>
+                <div class="metric-bar">
+                  <div class="metric-bar-fill danger" id="deepfakeBar"></div>
+                </div>
+              </div>
+
+              <div class="metric-card" id="metricModel">
+                <div class="metric-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                    <line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+                  </svg>
+                </div>
+                <div class="metric-info">
+                  <span class="metric-name">Model Confidence</span>
+                  <span class="metric-value" id="modelConf">—</span>
+                </div>
+                <div class="metric-bar">
+                  <div class="metric-bar-fill" id="modelBar"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Analyzed Image -->
+            <div class="analyzed-image-section">
+              <h3 class="metric-label">Analyzed Image</h3>
+              <div class="analyzed-img-wrap">
+                <img id="analyzedImage" src="" alt="The analyzed image" class="analyzed-img" />
+                <div class="img-overlay-result" id="imgOverlayResult">
+                  <span class="img-result-badge" id="imgResultBadge">REAL</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="result-footer">
+            <p class="result-disclaimer">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+              </svg>
+              Results are generated by AI and should be used as a reference only. GENRECT v2.4 · Neural Engine
+            </p>
+            <button class="btn-analyze-another" id="analyzeAnotherBtn" aria-label="Analyze another image">Analyze Another Image</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features-section" id="features" aria-labelledby="featuresTitle">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Why GENRECT</span>
+        <h2 class="section-title" id="featuresTitle">Built for Precision</h2>
+        <p class="section-desc">Our system uses state-of-the-art transformer-based vision models trained on millions of real and synthetic images.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card glass-card" tabindex="0">
+          <div class="feature-icon-wrap">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Lightning Fast</h3>
+          <p class="feature-desc">Get results in under 3 seconds with our optimized inference pipeline running on GPU clusters.</p>
+        </div>
+
+        <div class="feature-card glass-card" tabindex="0">
+          <div class="feature-icon-wrap">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">99.2% Accuracy</h3>
+          <p class="feature-desc">Industry-leading detection rates validated across GAN, diffusion, and face-swap generated content.</p>
+        </div>
+
+        <div class="feature-card glass-card" tabindex="0">
+          <div class="feature-icon-wrap">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Privacy First</h3>
+          <p class="feature-desc">All uploaded images are processed in isolated sandboxes and deleted immediately after analysis.</p>
+        </div>
+
+        <div class="feature-card glass-card" tabindex="0">
+          <div class="feature-icon-wrap">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="2" y1="12" x2="22" y2="12"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Multi-Format Support</h3>
+          <p class="feature-desc">Works with JPG, PNG, WEBP formats. Smart preprocessing handles compression artifacts automatically.</p>
+        </div>
+
+        <div class="feature-card glass-card" tabindex="0">
+          <div class="feature-icon-wrap">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Detailed Analytics</h3>
+          <p class="feature-desc">Comprehensive confidence scores, authenticity metrics, and per-region analysis for thorough inspection.</p>
+        </div>
+
+        <div class="feature-card glass-card" tabindex="0">
+          <div class="feature-icon-wrap">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M12 2a10 10 0 0 1 10 10c0 5.52-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2"/>
+              <path d="m9 12 2 2 4-4"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Continuous Learning</h3>
+          <p class="feature-desc">Our models are updated weekly with the latest deepfake generation techniques to stay ahead of threats.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="how-section" id="how-it-works" aria-labelledby="howTitle">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Process</span>
+        <h2 class="section-title" id="howTitle">How It Works</h2>
+        <p class="section-desc">A three-step process powered by advanced vision transformers and forensic analysis.</p>
+      </div>
+
+      <div class="steps-row">
+        <div class="step-card" tabindex="0">
+          <div class="step-number" aria-hidden="true">01</div>
+          <div class="step-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+          </div>
+          <h3 class="step-title">Upload Image</h3>
+          <p class="step-desc">Drag and drop or select any JPG, PNG, or WEBP image for instant analysis.</p>
+        </div>
+
+        <div class="step-connector" aria-hidden="true">
+          <div class="connector-line"></div>
+          <div class="connector-dot"></div>
+        </div>
+
+        <div class="step-card" tabindex="0">
+          <div class="step-number" aria-hidden="true">02</div>
+          <div class="step-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/>
+              <line x1="12" y1="17" x2="12" y2="21"/>
+            </svg>
+          </div>
+          <h3 class="step-title">AI Analysis</h3>
+          <p class="step-desc">Our Vision Transformer scans pixel patterns, metadata, and frequency artifacts in milliseconds.</p>
+        </div>
+
+        <div class="step-connector" aria-hidden="true">
+          <div class="connector-line"></div>
+          <div class="connector-dot"></div>
+        </div>
+
+        <div class="step-card" tabindex="0">
+          <div class="step-number" aria-hidden="true">03</div>
+          <div class="step-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+            </svg>
+          </div>
+          <h3 class="step-title">Get Results</h3>
+          <p class="step-desc">Receive a comprehensive authenticity report with confidence scores and detailed metrics.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section" aria-labelledby="ctaTitle">
+    <div class="container">
+      <div class="cta-card">
+        <div class="cta-glow" aria-hidden="true"></div>
+        <div class="cta-content">
+          <h2 class="cta-title" id="ctaTitle">Ready to Detect Deepfakes?</h2>
+          <p class="cta-desc">Join thousands of security professionals who trust GENRECT for image authenticity verification.</p>
+          <a href="#upload" class="btn-primary large" id="ctaBtn" aria-label="Start analyzing images now">
+            Start Analyzing Now
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <span class="footer-logo">GENRECT</span>
+          <span class="footer-tagline">Authenticity in Every Pixel</span>
+        </div>
+        <p class="footer-copy">GENRECT © 2026 | AI-Based Deepfake Detection System</p>
+        <div class="footer-links">
+          <a href="#" class="footer-link">Privacy</a>
+          <a href="#" class="footer-link">Terms</a>
+          <a href="#" class="footer-link">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
